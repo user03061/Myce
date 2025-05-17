@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Myce</string>
+    <string name="title_home">홈</string>
+    <string name="title_calendar">캘린더</string>
+    <string name="title_directions">중간지점 찾기</string>
+    <string name="title_myplace">내플레이스</string>
+    <string name="title_myprofile">내정보</string>
+    <string name="myce">MYCE</string>
+    <string name="Directions_title_UQE">중간지점 찾기        MYCE</string>
+</resources>
