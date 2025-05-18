@@ -1,41 +1,43 @@
 package com.example.myce.ui.directions
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myce.databinding.ItemPlaceResultBinding
+import com.example.myce.model.Place
 
 class PlaceSearchAdapter(
-    private val onItemClick: (DirectionsViewModel.Place) -> Unit
-) : ListAdapter<DirectionsViewModel.Place, PlaceSearchAdapter.PlaceViewHolder>(DiffCallback()) {
+    private val onItemClick: (Place) -> Unit
+) : ListAdapter<Place, PlaceSearchAdapter.PlaceViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
-        return PlaceViewHolder(view)
+        val binding = ItemPlaceResultBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return PlaceViewHolder(binding)
     }
 
+    // onBindViewHolder 수정: bind() 메서드 사용
     override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {
-        val place = getItem(position)
-        holder.bind(place)
+        holder.bind(getItem(position))
     }
 
-    inner class PlaceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(place: DirectionsViewModel.Place) {
-            (itemView as TextView).text = place.title
-            itemView.setOnClickListener { onItemClick(place) }
+    inner class PlaceViewHolder(private val binding: ItemPlaceResultBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(place: Place) {
+            binding.textTitle.text = place.title
+            binding.textAddress.text = place.address
+            binding.root.setOnClickListener { onItemClick(place) }
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<DirectionsViewModel.Place>() {
-        override fun areItemsTheSame(oldItem: DirectionsViewModel.Place, newItem: DirectionsViewModel.Place): Boolean {
+    class DiffCallback : DiffUtil.ItemCallback<Place>() {
+        override fun areItemsTheSame(oldItem: Place, newItem: Place): Boolean {
             return oldItem.title == newItem.title
         }
 
-        override fun areContentsTheSame(oldItem: DirectionsViewModel.Place, newItem: DirectionsViewModel.Place): Boolean {
+        override fun areContentsTheSame(oldItem: Place, newItem: Place): Boolean {
             return oldItem == newItem
         }
     }

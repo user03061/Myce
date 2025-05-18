@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myce.databinding.DialogSearchBinding
 import com.example.myce.databinding.FragmentDirectionsBinding
 import com.google.android.gms.maps.CameraUpdate
 import com.naver.maps.map.MapView
