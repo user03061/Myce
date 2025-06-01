@@ -1,9 +1,10 @@
 package com.example.myce.api_interface
 
 import com.example.myce.model.NaverApiResponse
-import okhttp3.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
+import retrofit2.Response
+
 
 interface NaverApiService {
 
