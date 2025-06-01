@@ -11,3 +11,9 @@ data class NaverPlaceItem(
     val mapy: String
 )
 
+
+//data class NaverSearchResponse(
+//    @SerializedName("title") val title: String,
+//    @SerializedName("mapx") val mapx: String,
+//    @SerializedName("mapy") val mapy: String
+//)

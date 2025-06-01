@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.myce.api_interface.NaverApiClient
+import com.example.myce.model.MyPlace
 import com.google.android.gms.location.places.Place
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraPosition
@@ -24,8 +25,9 @@ class DirectionsViewModel(application: Application) : AndroidViewModel(applicati
     private val _naverMap = MutableLiveData<NaverMap>()
     val naverMap: NaverMap? get() = _naverMap.value
 
-    private val _searchResults = MutableLiveData<List<Place>>()
-    val searchResults: LiveData<List<Place>> get() = _searchResults
+    private val _searchResults = MutableLiveData<List<MyPlace>>()
+    val searchResults: LiveData<List<MyPlace>> get() = _searchResults
+
 
     fun onMapReady(mapView: MapView) {
         mapView.getMapAsync {
@@ -46,30 +48,27 @@ class DirectionsViewModel(application: Application) : AndroidViewModel(applicati
     fun searchPlaces(query: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                // API 호출
                 val response = NaverApiClient.apiService.searchPlaces(query)
 
-                // 응답이 성공적인지 확인
                 if (response.isSuccessful) {
-                    // 응답 본문 가져오기 (NaverApiResponse)
-                    val result = response.body()?.items?.map {
-                        val lat = tm128ToLatLng(it.mapx.toDouble(), it.mapy.toDouble()).latitude
-                        val lng = tm128ToLatLng(it.mapx.toDouble(), it.mapy.toDouble()).longitude
-                        Place(title = stripHtml(it.title), latLng = LatLng(lat, lng))
+                    val result = response.body()?.items?.map { item ->
+                        // TM128 → 위경도 변환
+                        val latLng = tm128ToLatLng(item.mapx.toDouble(), item.mapy.toDouble())
+
+                        // HTML 제거 및 객체 생성
+                        MyPlace(title = stripHtml(item.title), latLng = latLng)
                     } ?: emptyList()
 
-                    // 결과를 LiveData에 설정
                     _searchResults.postValue(result)
                 } else {
-                    // 실패한 경우 오류 처리
-                    Log.e("NAVER_API", "Error: ${response.errorBody()?.string()}")
+                    Log.e("NAVER_API", "API Error: ${response.errorBody()?.string()}")
                 }
             } catch (e: Exception) {
-                // 예외 처리 (네트워크 오류 등)
-                Log.e("NAVER_API", "Exception: $e")
+                Log.e("NAVER_API", "Exception: ${e.message}", e)
             }
         }
     }
+
 
 
     init {
@@ -78,7 +77,3 @@ class DirectionsViewModel(application: Application) : AndroidViewModel(applicati
     }
 }
 
-data class Place(
-    val title: String,
-    val latLng: LatLng
-)

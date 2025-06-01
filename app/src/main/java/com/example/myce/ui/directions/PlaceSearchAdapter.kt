@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myce.databinding.ItemPlaceResultBinding
-import com.example.myce.model.Place
+import com.example.myce.model.MyPlace
 
 class PlaceSearchAdapter(
-    private val onItemClick: (Place) -> Unit
-) : ListAdapter<Place, PlaceSearchAdapter.PlaceViewHolder>(DiffCallback()) {
+    private val onItemClick: (MyPlace) -> Unit
+) : ListAdapter<MyPlace, PlaceSearchAdapter.PlaceViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceViewHolder {
         val binding = ItemPlaceResultBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -25,19 +25,19 @@ class PlaceSearchAdapter(
     inner class PlaceViewHolder(private val binding: ItemPlaceResultBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(place: Place) {
+        fun bind(place: MyPlace) {
             binding.textTitle.text = place.title
-            binding.textAddress.text = place.address
+            binding.textAddress.text = place.latLng.toString()
             binding.root.setOnClickListener { onItemClick(place) }
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<Place>() {
-        override fun areItemsTheSame(oldItem: Place, newItem: Place): Boolean {
+    class DiffCallback : DiffUtil.ItemCallback<MyPlace>() {
+        override fun areItemsTheSame(oldItem: MyPlace, newItem: MyPlace): Boolean {
             return oldItem.title == newItem.title
         }
 
-        override fun areContentsTheSame(oldItem: Place, newItem: Place): Boolean {
+        override fun areContentsTheSame(oldItem: MyPlace, newItem: MyPlace): Boolean {
             return oldItem == newItem
         }
     }

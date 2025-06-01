@@ -6,25 +6,26 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object NaverApiClient {
-    private const val BASE_URL = "https://openapi.naver.com/"
+    private const val BASE_URL = "https://openapi.naver.com/v1/search/"
 
-    private val client = OkHttpClient.Builder()
-        .addInterceptor { chain ->
-            val request = chain.request().newBuilder()
-                .addHeader("X-Naver-Client-Id", "YOUR_CLIENT_ID")
-                .addHeader("X-Naver-Client-Secret", "YOUR_CLIENT_SECRET")
-                .build()
-            chain.proceed(request)
-        }
-        .addInterceptor(HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        })
-        .build()
-
-    val retrofit: NaverSearchApi = Retrofit.Builder()
+    private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .client(client)
         .addConverterFactory(GsonConverterFactory.create())
+        .client(provideOkHttpClient())
         .build()
-        .create(NaverSearchApi::class.java)
+
+    val apiService: NaverSearchApi = retrofit.create(NaverSearchApi::class.java)
+
+    private fun provideOkHttpClient(): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor { chain ->
+                val request = chain.request().newBuilder()
+                    .addHeader("X-Naver-Client-Id", "YOUR_CLIENT_ID")
+                    .addHeader("X-Naver-Client-Secret", "YOUR_CLIENT_SECRET")
+                    .build()
+                chain.proceed(request)
+            }
+            .build()
+    }
 }
+
