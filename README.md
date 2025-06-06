@@ -24,7 +24,7 @@
   - 리스트 뷰로 구성 되있으며 하단에 일일 메모 추가가능( 하루가 지나면 메모 자동 삭제)
   - (SQLite 또는 다른화면에 있는 정보를 Live Data 옵저버를 활용해 databinding으로 불러와서 정렬할까 고민중)
 
-  ![image](https://github.com/user-attachments/assets/973db27e-c4b1-4093-a098-e42e3ef6331f)
+
 
 
     
@@ -32,4 +32,17 @@
 2.중간 지점 탐색
   - 위치 a, b를 입력하면 중간 지점을 찾아준다.(구글 중간경로 탐색 api가 존재함, 다른데도 있는지 확인 해야 함.)
   - 하단에 예상 시간등을 확인 할 수 있게 표시된다.
-  - 자세한 경로를 볼 수 있게 할까 고민중(이게 아니라면 naver 지도 어플을 같이 깔아 연동되게 ㄱㄱ?)
+    
+![image](https://github.com/user-attachments/assets/517fed36-2458-447f-8fcf-cb445a7e72cb)
+
+  - 장소를 입력하면 연관검색어가 뜨도록..
+    
+![image](https://github.com/user-attachments/assets/475828c2-ac7b-4b6e-bfac-def8e8f31a09)
+
+
+3.내플레이스 탐색
+
+  - 나만의 장소를 찾아 추가하고 저장 해놓을 수 있음
+
+![image](https://github.com/user-attachments/assets/75e81e2b-3318-4e94-9830-be50be1ecd51)
+
