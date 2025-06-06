@@ -1,6 +1,7 @@
 package com.example.myce
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -29,9 +30,15 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home, R.id.navigation_calendar, R.id.navigation_directions,
-                R.id.navigation_myPlace, R.id.navigation_myProfile
+                R.id.navigation_myplace, R.id.navigation_myProfile
             )
         )
+
+        navView.setOnItemSelectedListener { item ->
+            Log.d("MainActivity", "Menu clicked: ${item.itemId}")
+            false // false로 리턴하면 navigation이 작동 안 함
+        }
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }

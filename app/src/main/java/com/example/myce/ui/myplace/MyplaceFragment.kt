@@ -4,16 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import com.example.myce.R
 import com.example.myce.databinding.FragmentMyplaceBinding
+import com.naver.maps.map.MapView
 
 class MyplaceFragment : Fragment() {
 
     private var _binding: FragmentMyplaceBinding? = null
+
+    private lateinit var myplaceViewModel: MyplaceViewModel
+
+    private lateinit var mapView: MapView //왼쪽 id 오른쪽 네이버api 명칭
+
+
 
     private val binding get() = _binding!!
 
@@ -21,22 +25,52 @@ class MyplaceFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View {
-        val myplaceViewModel =
-            ViewModelProvider(this).get(MyplaceViewModel::class.java)
+
+
+        myplaceViewModel = ViewModelProvider(this).get(MyplaceViewModel::class.java)
 
         _binding = FragmentMyplaceBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textMyplace
-        myplaceViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        mapView = binding.mapView
+        mapView.onCreate(savedInstanceState)
+        onMapReady(mapView)
+
+
         return root
     }
+
+    private fun onMapReady(mapView: MapView) {
+        mapView.getMapAsync { naverMap ->
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        mapView.onDestroy()  // 지도 리소스 해제
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mapView.onStart()  // 지도 라이프사이클 관리
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()  // 지도 라이프사이클 관리
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapView.onPause()  // 지도 라이프사이클 관리
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mapView.onStop()  // 지도 라이프사이클 관리
     }
 }

@@ -12,7 +12,6 @@ import com.example.myce.model.MyPlace
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
-import com.naver.maps.map.NaverMapSdk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -65,13 +64,6 @@ class DirectionsViewModel(application: Application) : AndroidViewModel(applicati
                 Log.e("NAVER_API", "Exception: ${e.message}", e)
             }
         }
-    }
-
-
-
-    init {
-        NaverMapSdk.getInstance(application).client =
-            NaverMapSdk.NaverCloudPlatformClient("YOUR_NAVER_CLIENT_ID")
     }
 }
 

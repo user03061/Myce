@@ -55,7 +55,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     // 네이버 지도 SDK
-    implementation("com.naver.maps:map-sdk:3.20.0")
+    implementation("com.naver.maps:map-sdk:3.21.0")
     // 현재 위치 표시를 위한 의존성 추가
     implementation("com.google.android.gms:play-services-location:20.0.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")

@@ -24,14 +24,14 @@
         tools:layout="@layout/fragment_directions" />
 
     <fragment
-        android:id="@+id/navigation_myPlace"
-        android:name="com.example.myce.ui.directions.DirectionsFragment"
+        android:id="@+id/navigation_myplace"
+        android:name="com.example.myce.ui.myplace.MyplaceFragment"
         android:label="@string/title_myplace"
         tools:layout="@layout/fragment_myplace" />
 
     <fragment
         android:id="@+id/navigation_myProfile"
-        android:name="com.example.myce.ui.directions.DirectionsFragment"
+        android:name="com.example.myce.ui.myplace.MyplaceFragment"
         android:label="@string/title_myprofile"
         tools:layout="@layout/fragment_myprofile" />
 </navigation>
