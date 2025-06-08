@@ -45,7 +45,7 @@
                 android:layout_marginStart="8dp"
                 android:backgroundTint="#216AF2"
                 android:elevation="6dp"
-                android:text="장소 추가"
+                android:text="검색"
                 android:textColor="#FFF"
                 android:textSize="16sp" />
         </LinearLayout>
