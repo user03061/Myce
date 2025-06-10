@@ -4,7 +4,6 @@ import com.naver.maps.geometry.LatLng
 
 data class MyPlace(
     val title: String,
-   // val address: String,
     val latLng: LatLng
 )
 

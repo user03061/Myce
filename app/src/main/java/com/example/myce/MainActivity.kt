@@ -39,7 +39,8 @@ class MainActivity : AppCompatActivity() {
             false // false로 리턴하면 navigation이 작동 안 함
         }
 
-        setupActionBarWithNavController(navController, appBarConfiguration)
+       //setupActionBarWithNavController(navController, appBarConfiguration)
+        // appBarCon <- 얘가 상단에 메뉴바를 만듬
         navView.setupWithNavController(navController)
     }
 }
