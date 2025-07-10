@@ -2,12 +2,10 @@ package com.example.myce.ui.directions
 
 import android.app.Application
 import android.text.Html
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.myce.api_interface.NaverApiClient
 import com.example.myce.model.MyPlace
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.MapView
@@ -42,28 +40,10 @@ class DirectionsViewModel(application: Application) : AndroidViewModel(applicati
         return Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY).toString()
     }
 
-    fun searchPlaces(query: String) {
+    fun searchPlaces(query: String) { //연관 검색어 mysql로 db값 연동
         viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val response = NaverApiClient.apiService.searchPlaces(query)
 
-                if (response.isSuccessful) {
-                    val result = response.body()?.items?.map { item ->
-                        // TM128 → 위경도 변환
-                        val latLng = tm128ToLatLng(item.mapx.toDouble(), item.mapy.toDouble())
-
-                        // HTML 제거 및 객체 생성
-                        MyPlace(title = stripHtml(item.title), latLng = latLng)
-                    } ?: emptyList()
-
-                    _searchResults.postValue(result)
-                } else {
-                    Log.e("NAVER_API", "API Error: ${response.errorBody()?.string()}")
-                }
-            } catch (e: Exception) {
-                Log.e("NAVER_API", "Exception: ${e.message}", e)
             }
         }
-    }
 }
 

@@ -1,11 +1,11 @@
-package com.example.myce.api_interface
+package com.example.myce.db_interface
 
 import com.example.myce.model.NaverApiResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface NaverSearchApi {
+interface mysqlSearchModel {
     @GET("local.json")
     suspend fun searchPlaces(
         @Query("query") query: String,

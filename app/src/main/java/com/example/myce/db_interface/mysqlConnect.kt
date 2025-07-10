@@ -1,4 +1,4 @@
-package com.example.myce.api_interface
+package com.example.myce.db_interface
 
 import com.example.myce.model.NaverApiResponse
 import retrofit2.http.GET
@@ -6,7 +6,7 @@ import retrofit2.http.Query
 import retrofit2.Response
 
 
-interface NaverApiService {
+interface mysqlConnect {
 
     @GET("local.json")
     suspend fun searchPlaces(
