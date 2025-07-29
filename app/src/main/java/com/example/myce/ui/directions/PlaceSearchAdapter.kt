@@ -28,9 +28,12 @@ class PlaceSearchAdapter(
         fun bind(place: MyPlace) {
             binding.textTitle.text = place.title
             binding.textAddress.text = place.latLng.toString()
-            binding.root.setOnClickListener { onItemClick(place) }
+            binding.root.setOnClickListener {
+                onItemClick(place)  // 여기가 클릭 시 호출되어야 함
+            }
         }
     }
+
 
     class DiffCallback : DiffUtil.ItemCallback<MyPlace>() {
         override fun areItemsTheSame(oldItem: MyPlace, newItem: MyPlace): Boolean {

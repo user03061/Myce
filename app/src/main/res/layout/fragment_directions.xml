@@ -50,6 +50,15 @@
                 android:inputType="text"
                 android:layout_marginBottom="8dp" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerResultsA"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/routeA"
+                app:layout_constraintStart_toStartOf="@id/routeA"
+                app:layout_constraintEnd_toEndOf="@id/routeA"/>
+
             <EditText
                 android:id="@+id/routeB"
                 android:layout_width="match_parent"
@@ -58,6 +67,15 @@
                 android:textSize="16sp"
                 android:textColor="#000"
                 android:inputType="text" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerResultsB"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/routeB"
+                app:layout_constraintStart_toStartOf="@id/routeB"
+                app:layout_constraintEnd_toEndOf="@id/routeB"/>
         </LinearLayout>
 
         <!-- 검색 버튼: 세로 중앙 -->
