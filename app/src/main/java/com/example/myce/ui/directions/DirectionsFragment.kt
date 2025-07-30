@@ -3,7 +3,6 @@ package com.example.myce.ui.directions
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -176,5 +175,10 @@ class DirectionsFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         mapView.onStop()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mapView.onSaveInstanceState(outState)
     }
 }

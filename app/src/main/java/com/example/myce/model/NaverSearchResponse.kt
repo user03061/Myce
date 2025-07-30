@@ -1,4 +1,4 @@
-package com.example.myce.api_interface
+package com.example.myce.model
 
 data class NaverSearchResponse(
     val items: List<NaverSearchItem>

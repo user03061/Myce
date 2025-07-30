@@ -1,5 +1,6 @@
 package com.example.myce.api_interface
 
+import com.example.myce.model.NaverSearchResponse
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query

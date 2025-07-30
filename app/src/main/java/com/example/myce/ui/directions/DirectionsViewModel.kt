@@ -41,7 +41,7 @@ class DirectionsViewModel(private val app: Application) : ViewModel() {
             .getApplicationInfo(app.packageName, PackageManager.GET_META_DATA)
             .metaData
 
-        val clientId = metaData.getString("NAVER_CLIENT_ID") ?: ""
+        val clientId = metaData.getString("com.naver.maps.map.NCP_KEY_ID") ?: ""
         val clientSecret = metaData.getString("NAVER_CLIENT_SECRET") ?: ""
         return Pair(clientId, clientSecret)
     }
@@ -52,7 +52,7 @@ class DirectionsViewModel(private val app: Application) : ViewModel() {
             .addConverterFactory(GsonConverterFactory.create())
             .client(
                 OkHttpClient.Builder()
-                            .build()
+                    .build()
             )
             .build()
             .create(GeocodingService::class.java)
@@ -92,8 +92,14 @@ class DirectionsViewModel(private val app: Application) : ViewModel() {
         mapView.getMapAsync { map ->
             _naverMap.value = map
             Log.d("DirectionsViewModel", "NaverMap 초기화 완료")
+            val metaData = app.packageManager
+                .getApplicationInfo(app.packageName, PackageManager.GET_META_DATA)
+                .metaData
+            val clientId = metaData.getString("com.naver.maps.map.CLIENT_ID")
+            Log.d("네이버지도", "CLIENT_ID: $clientId")
         }
     }
+
 
 }
 
