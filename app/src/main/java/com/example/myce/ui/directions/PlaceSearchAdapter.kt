@@ -17,7 +17,6 @@ class PlaceSearchAdapter(
         return PlaceViewHolder(binding)
     }
 
-    // onBindViewHolder 수정: bind() 메서드 사용
     override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {
         holder.bind(getItem(position))
     }

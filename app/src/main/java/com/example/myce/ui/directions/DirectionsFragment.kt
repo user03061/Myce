@@ -107,7 +107,7 @@ class DirectionsFragment : Fragment() {
                 binding.recyclerResultsA.visibility = View.GONE
                 selectedPlaceA?.let {
                     directionsViewModel.naverMap?.moveCamera(
-                        CameraUpdate.scrollAndZoomTo(it.latLng, 15.0).animate(CameraAnimation.Easing)
+                        CameraUpdate.scrollAndZoomTo(it.latLng, 15.0).animate(CameraAnimation.Easing) //Geocoding이 돼야 이걸 뭘 하든 말든 함
                     )
                 }
             }
