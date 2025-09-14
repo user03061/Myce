@@ -10,6 +10,7 @@ interface GeocodingService {
     @GET("map-geocode/v2/geocode")
     fun getGeocode(
         @Query("query") query: String,
+        @Query("coordinate") coordinate: String? = null,
         @Header("X-NCP-APIGW-API-KEY-ID") clientId: String,
         @Header("X-NCP-APIGW-API-KEY") clientSecret: String
     ): Call<GeocodeResponse>
