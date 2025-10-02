@@ -26,6 +26,15 @@
             android:name="NAVER_CLIENT_SECRET"
             android:value="Z6IDWfU4K6YNTj0Rm1Ry2THHF23xG1vOYy0gzWdm" />
 
+
+        <meta-data
+            android:name="=com.naver.search.api.CLIENT_ID"
+            android:value="TEiyTXH_hLCdZhOr7kK2" />
+
+        <meta-data
+            android:name="com.naver.search.api.CLIENT_SECRET"
+            android:value="ndfWElDme9" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

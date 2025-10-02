@@ -72,7 +72,7 @@ class DirectionsFragment : Fragment() {
                     selectedPlaceA = places[0]
                     binding.recyclerResultsA.visibility = View.GONE
                     directionsViewModel.naverMap?.moveCamera(
-                        CameraUpdate.scrollAndZoomTo(selectedPlaceA!!.latLng, 15.0)
+                        CameraUpdate.scrollAndZoomTo(selectedPlaceA!!.latLng, 17.0)
                             .animate(CameraAnimation.Easing)
                     )
                 } else {
@@ -90,7 +90,7 @@ class DirectionsFragment : Fragment() {
                     selectedPlaceB = places[0]
                     binding.recyclerResultsB.visibility = View.GONE
                     directionsViewModel.naverMap?.moveCamera(
-                        CameraUpdate.scrollAndZoomTo(selectedPlaceB!!.latLng, 15.0)
+                        CameraUpdate.scrollAndZoomTo(selectedPlaceB!!.latLng, 17.0)
                             .animate(CameraAnimation.Easing)
                     )
                 } else {

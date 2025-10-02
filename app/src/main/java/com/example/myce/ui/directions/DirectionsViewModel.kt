@@ -3,11 +3,9 @@ package com.example.myce.ui.directions
 import android.app.Application
 import android.content.pm.PackageManager
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myce.api_interface.GeocodingService
-import com.example.myce.model.GeocodeAddress
 import com.example.myce.model.GeocodeResponse
 import com.example.myce.model.MyPlace
 import com.naver.maps.geometry.LatLng
@@ -15,12 +13,13 @@ import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
 import okhttp3.OkHttpClient
 import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
 class DirectionsViewModel(private val app: Application) : ViewModel() {
-
 
     private val clientId: String
     private val clientSecret: String
@@ -60,36 +59,48 @@ class DirectionsViewModel(private val app: Application) : ViewModel() {
 
     fun searchPlaces(query: String, callback: (List<MyPlace>) -> Unit) {
         val call = naverGeocodeApi.getGeocode(query, null, clientId, clientSecret)
-        call.enqueue(object : retrofit2.Callback<GeocodeResponse> {
+
+        call.enqueue(object : Callback<GeocodeResponse> {
             override fun onResponse(
                 call: Call<GeocodeResponse>,
-                response: retrofit2.Response<GeocodeResponse>
+                response: Response<GeocodeResponse>
             ) {
-                val places = if (response.isSuccessful) {
-                    response.body()?.addresses?.mapNotNull { addr ->
+                Log.d("Geocode", "Response code: ${response.code()}")
+                if (response.isSuccessful) {
+                    val body = response.body()
+                    Log.d("Geocode", "Response body: $body")
+
+                    val places = body?.addresses?.mapNotNull { addr ->
+                        Log.d("Geocode", "Raw addr: x=${addr.x}, y=${addr.y}, road=${addr.roadAddress}, jibun=${addr.jibunAddress}")
+
                         val lat = addr.y.toDoubleOrNull()
                         val lng = addr.x.toDoubleOrNull()
+
                         if (lat != null && lng != null) {
                             val latLng = LatLng(lat, lng)
-                            Log.d("Geocode", "LatLng: ${latLng.latitude}, ${latLng.longitude}")
-                            MyPlace(
-                                title = addr.roadAddress ?: addr.jibunAddress ?: "주소 없음",
-                                address = addr.roadAddress ?: addr.jibunAddress,
-                                latLng = LatLng(lat, lng)
-                            )
-                        } else null
+                            Log.d("Geocode", "LatLng parsed: ${latLng.latitude}, ${latLng.longitude}")
+                            MyPlace(addr.roadAddress ?: addr.jibunAddress ?: "주소 없음", addr.roadAddress ?: addr.jibunAddress, latLng)
+                        } else {
+                            Log.w("Geocode", "좌표 변환 실패: x=${addr.x}, y=${addr.y}")
+                            null
+                        }
                     } ?: emptyList()
+
+                    Log.d("Geocode", "Parsed places: $places")
+                    callback(places)
                 } else {
-                    emptyList()
+                    Log.e("Geocode", "API 실패: ${response.errorBody()?.string()}")
+                    callback(emptyList())
                 }
-                callback(places)
             }
 
             override fun onFailure(call: Call<GeocodeResponse>, t: Throwable) {
+                Log.e("Geocode", "네트워크 오류: ${t.message}", t)
                 callback(emptyList())
             }
         })
     }
+
 
     fun onMapReady(mapView: MapView) {
         mapView.getMapAsync { map ->
