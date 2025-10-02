@@ -33,16 +33,21 @@
   - 위치 a, b를 입력하면 중간 지점을 찾아준다.(구글 중간경로 탐색 api가 존재함, 다른데도 있는지 확인 해야 함.)
   - 하단에 예상 시간등을 확인 할 수 있게 표시된다.
     
-![image](https://github.com/user-attachments/assets/517fed36-2458-447f-8fcf-cb445a7e72cb)
+<img width="237" height="530" alt="image" src="https://github.com/user-attachments/assets/a86ae4bc-2bd8-46ec-a57f-ca0b44ba6d7b" />
+
+geocoding 좌표 반환도 정상적으로 작동된다.
+<img width="1334" height="68" alt="image" src="https://github.com/user-attachments/assets/618cad3d-f49b-4a99-8ad0-1a3c90af9932" />
+
+
+
 
   - 장소를 입력하면 연관검색어가 뜨도록..
-    
-![image](https://github.com/user-attachments/assets/475828c2-ac7b-4b6e-bfac-def8e8f31a09)
 
 
 3.내플레이스 탐색
 
   - 나만의 장소를 찾아 추가하고 저장 해놓을 수 있음
 
-![image](https://github.com/user-attachments/assets/75e81e2b-3318-4e94-9830-be50be1ecd51)
+<img width="235" height="524" alt="image" src="https://github.com/user-attachments/assets/4fdbf6c0-1cdd-4615-bff1-83a5209b5254" />
+
 
