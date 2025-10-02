@@ -33,11 +33,13 @@
   - 위치 a, b를 입력하면 중간 지점을 찾아준다.(구글 중간경로 탐색 api가 존재함, 다른데도 있는지 확인 해야 함.)
   - 하단에 예상 시간등을 확인 할 수 있게 표시된다.
     
-![image](https://github.com/user-attachments/assets/517fed36-2458-447f-8fcf-cb445a7e72cb)
+<img width="237" height="530" alt="image" src="https://github.com/user-attachments/assets/a86ae4bc-2bd8-46ec-a57f-ca0b44ba6d7b" />
+
 
   - 장소를 입력하면 연관검색어가 뜨도록..
     
-![image](https://github.com/user-attachments/assets/475828c2-ac7b-4b6e-bfac-def8e8f31a09)
+<img width="238" height="527" alt="image" src="https://github.com/user-attachments/assets/89690547-4e12-4e93-888b-12a2e1407323" />
+
 
 
 3.내플레이스 탐색
