@@ -22,7 +22,7 @@
     <TextView
         android:id="@+id/textAddress"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="15dp"
         android:text="주소 정보"
         android:textSize="14sp"
         android:textColor="#666666"

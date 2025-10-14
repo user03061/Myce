@@ -12,6 +12,18 @@ class PlaceSearchAdapter(
     private val onItemClick: (MyPlace) -> Unit
 ) : ListAdapter<MyPlace, PlaceSearchAdapter.PlaceViewHolder>(DiffCallback()) {
 
+    inner class PlaceViewHolder(private val binding: ItemPlaceResultBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(place: MyPlace) {
+            binding.textTitle.text = place.title
+            binding.textAddress.text = place.address ?: ""
+            binding.root.setOnClickListener {
+                onItemClick(place)
+            }
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceViewHolder {
         val binding = ItemPlaceResultBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PlaceViewHolder(binding)
@@ -21,26 +33,11 @@ class PlaceSearchAdapter(
         holder.bind(getItem(position))
     }
 
-    inner class PlaceViewHolder(private val binding: ItemPlaceResultBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(place: MyPlace) {
-            binding.textTitle.text = place.title
-            binding.textAddress.text = place.latLng.toString()
-            binding.root.setOnClickListener {
-                onItemClick(place)  // 여기가 클릭 시 호출되어야 함
-            }
-        }
-    }
-
-
     class DiffCallback : DiffUtil.ItemCallback<MyPlace>() {
-        override fun areItemsTheSame(oldItem: MyPlace, newItem: MyPlace): Boolean {
-            return oldItem.title == newItem.title
-        }
+        override fun areItemsTheSame(oldItem: MyPlace, newItem: MyPlace) =
+            oldItem.latLng == newItem.latLng
 
-        override fun areContentsTheSame(oldItem: MyPlace, newItem: MyPlace): Boolean {
-            return oldItem == newItem
-        }
+        override fun areContentsTheSame(oldItem: MyPlace, newItem: MyPlace) =
+            oldItem == newItem
     }
 }

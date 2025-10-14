@@ -6,13 +6,14 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
 
-interface GeocodingService {
+interface GeocodingService { //보류
+
     @GET("map-geocode/v2/geocode")
     fun getGeocode(
         @Query("query") query: String,
         @Query("coordinate") coordinate: String? = null,
+        @Query("addressElements") addressElements: Array<String>? = null,
         @Header("X-NCP-APIGW-API-KEY-ID") clientId: String,
         @Header("X-NCP-APIGW-API-KEY") clientSecret: String
     ): Call<GeocodeResponse>
 }
-

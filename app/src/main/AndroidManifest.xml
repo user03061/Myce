@@ -28,8 +28,9 @@
 
 
         <meta-data
-            android:name="=com.naver.search.api.CLIENT_ID"
+            android:name="com.naver.search.api.CLIENT_ID"
             android:value="TEiyTXH_hLCdZhOr7kK2" />
+
 
         <meta-data
             android:name="com.naver.search.api.CLIENT_SECRET"
