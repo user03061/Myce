@@ -18,6 +18,7 @@ import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
 import kotlinx.coroutines.launch
 
+
 class DirectionsFragment : Fragment() {
 
     private lateinit var directionsViewModel: DirectionsViewModel
@@ -116,7 +117,6 @@ class DirectionsFragment : Fragment() {
             }
         }
     }
-
 
 
     // life cycle

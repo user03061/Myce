@@ -1,6 +1,9 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -14,7 +17,14 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        manifestPlaceholders["NAVER_CLIENT_ID"] = getLocalProperty("NAVER_CLIENT_ID")
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "NAVER_CLIENT_ID", "\"${getLocalProperty("NAVER_CLIENT_ID")}\"")
+        buildConfigField("String", "NAVER_CLIENT_SECRET", "\"${getLocalProperty("NAVER_CLIENT_SECRET")}\"")
+        buildConfigField("String", "LOCAL_KEY_ID", "\"${getLocalProperty("LOCAL_KEY_ID")}\"")
+        buildConfigField("String", "LOCAL_SECRET_KEY", "\"${getLocalProperty("LOCAL_SECRET_KEY")}\"")
     }
 
     buildTypes {
@@ -35,7 +45,18 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
+}
+
+
+fun getLocalProperty(key: String): String {
+    val props = Properties()
+    val file = rootProject.file("local.properties")
+    if (file.exists()) {
+        props.load(FileInputStream(file))
+    }
+    return props.getProperty(key, "")
 }
 
 dependencies {
@@ -63,4 +84,5 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11")
     //WGS84 좌표로 변환하기 위한 의존성 추가
     implementation("org.locationtech.proj4j:proj4j:1.2.1")
+
 }

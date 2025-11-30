@@ -8,6 +8,7 @@
 
 
     <application
+        android:name=".load.MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -18,23 +19,10 @@
         android:theme="@style/Theme.Myce"
         tools:targetApi="31">
 
-        <meta-data
-            android:name="com.naver.maps.map.NCP_KEY_ID"
-            android:value="zk2k2t6vi5" />
 
         <meta-data
-            android:name="NAVER_CLIENT_SECRET"
-            android:value="Z6IDWfU4K6YNTj0Rm1Ry2THHF23xG1vOYy0gzWdm" />
-
-
-        <meta-data
-            android:name="com.naver.search.api.CLIENT_ID"
-            android:value="TEiyTXH_hLCdZhOr7kK2" />
-
-
-        <meta-data
-            android:name="com.naver.search.api.CLIENT_SECRET"
-            android:value="ndfWElDme9" />
+            android:name="NAVER_CLIENT_ID"
+            android:value="${NAVER_CLIENT_ID}" />
 
         <activity
             android:name=".MainActivity"

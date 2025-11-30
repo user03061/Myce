@@ -1,7 +1,6 @@
 package com.example.myce.ui.directions
 
 import android.app.Application
-import android.content.pm.PackageManager
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,6 +18,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import com.example.myce.BuildConfig
+
 
 class DirectionsViewModel(private val app: Application) : ViewModel() {
 
@@ -29,28 +30,12 @@ class DirectionsViewModel(private val app: Application) : ViewModel() {
 
     //Naver Search API 키 받기
     private fun getSearchApiKeys(): Pair<String, String> {
-        val metaData = app.packageManager
-            .getApplicationInfo(app.packageName, PackageManager.GET_META_DATA)
-            .metaData
-
-        val clientId = metaData.getString("com.naver.search.api.CLIENT_ID") ?: ""
-        val clientSecret = metaData.getString("com.naver.search.api.CLIENT_SECRET") ?: ""
-
-        Log.d(TAG, "SearchAPI Key loaded: $clientId / $clientSecret")
-        return Pair(clientId, clientSecret)
+        return Pair(BuildConfig.LOCAL_KEY_ID, BuildConfig.LOCAL_SECRET_KEY)
     }
 
     //Naver Geocoding API 키 받기
     private fun getGeoApiKeys(): Pair<String, String> {
-        val metaData = app.packageManager
-            .getApplicationInfo(app.packageName, PackageManager.GET_META_DATA)
-            .metaData
-
-        val clientId = metaData.getString("com.naver.maps.map.NCP_KEY_ID") ?: ""
-        val clientSecret = metaData.getString("NAVER_CLIENT_SECRET") ?: ""
-
-        Log.d(TAG, "GeocodeAPI Key loaded: $clientId / $clientSecret")
-        return Pair(clientId, clientSecret)
+        return Pair(BuildConfig.NAVER_CLIENT_ID, BuildConfig.NAVER_CLIENT_SECRET)
     }
 
     //장소 검색 — Naver Search API → Geocoding API 순서
@@ -156,6 +141,7 @@ class DirectionsViewModel(private val app: Application) : ViewModel() {
         })
     }
 
+
     //지도 초기화
     fun onMapReady(mapView: MapView) {
         mapView.getMapAsync { map ->
@@ -163,4 +149,9 @@ class DirectionsViewModel(private val app: Application) : ViewModel() {
             Log.d(TAG, "NaverMap 초기화 완료")
         }
     }
+
+
+
+
+
 }
